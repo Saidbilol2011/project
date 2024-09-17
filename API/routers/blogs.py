@@ -17,7 +17,7 @@ router = APIRouter(
 )
 
 
-# GET Requests
+
 @router.get("/posts")
 async def get_posts(session: Session = Depends(get_session)):
 
@@ -43,7 +43,6 @@ async def get_post_by_id(post_id: int, session: Session = Depends(get_session)):
     return post
 
 
-# POST Requests (Creating)
 @router.post("/post", status_code=status.HTTP_201_CREATED)
 async def create_post(
     main_image: UploadFile= File(...),
@@ -95,7 +94,6 @@ async def create_post(
     }
 
 
-# Like, Save, Comment Endpoints
 @router.post('/like/{post_id}', status_code=status.HTTP_201_CREATED)
 async def create_like( 
     data: CreateLikeSchema,
@@ -189,7 +187,7 @@ async def write_comment(
         "message": "Comment Wrote!"
     }
 
-# Patch
+
 @router.patch("/change_comment/{post_id}", status_code=status.HTTP_201_CREATED)
 async def change_comment(
     data: PatchCommentSchema,
